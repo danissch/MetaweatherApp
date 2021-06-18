@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="18122" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="18093"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="LocationDetailViewController" customModule="MetaweatherApp" customModuleProvider="target">
+            <connections>
+                <outlet property="view" destination="iN0-l3-epB" id="R0L-cj-eXy"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="iN0-l3-epB">
+            <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="1Qv-uE-4AL">
+                    <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                    <subviews>
+                        <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="SF0-2f-cWh">
+                            <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        </mapView>
+                    </subviews>
+                    <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                    <constraints>
+                        <constraint firstItem="SF0-2f-cWh" firstAttribute="leading" secondItem="1Qv-uE-4AL" secondAttribute="leading" id="4iZ-G3-HFR"/>
+                        <constraint firstAttribute="bottom" secondItem="SF0-2f-cWh" secondAttribute="bottom" id="8Hj-Bj-VuC"/>
+                        <constraint firstItem="SF0-2f-cWh" firstAttribute="top" secondItem="1Qv-uE-4AL" secondAttribute="top" id="OBt-6V-ML3"/>
+                        <constraint firstAttribute="trailing" secondItem="SF0-2f-cWh" secondAttribute="trailing" id="VUm-ri-c1Y"/>
+                    </constraints>
+                </view>
+            </subviews>
+            <viewLayoutGuide key="safeArea" id="vUN-kp-3ea"/>
+            <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+            <constraints>
+                <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="1Qv-uE-4AL" secondAttribute="trailing" id="4sy-Ep-a8S"/>
+                <constraint firstItem="vUN-kp-3ea" firstAttribute="bottom" secondItem="1Qv-uE-4AL" secondAttribute="bottom" id="7xG-Ro-Vgx"/>
+                <constraint firstItem="1Qv-uE-4AL" firstAttribute="top" secondItem="vUN-kp-3ea" secondAttribute="top" id="FJ8-mc-6fl"/>
+                <constraint firstItem="1Qv-uE-4AL" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" id="N6d-iu-qcX"/>
+            </constraints>
+            <point key="canvasLocation" x="95.200000000000003" y="65.217391304347828"/>
+        </view>
+    </objects>
+    <resources>
+        <systemColor name="systemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+    </resources>
+</document>

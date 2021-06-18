@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="18122" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="18093"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="NoRecordsFoundTableViewCell" rowHeight="300" id="yRW-AF-Znp" customClass="NoRecordsFoundTableViewCell" customModule="pokemon" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="320" height="300"/>
+            <autoresizingMask key="autoresizingMask"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="yRW-AF-Znp" id="gND-RK-l01">
+                <rect key="frame" x="0.0" y="0.0" width="320" height="300"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="HtQ-Fc-gTe">
+                        <rect key="frame" x="16" y="11" width="288" height="278"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="No records found" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0kQ-Ue-a06">
+                                <rect key="frame" x="0.0" y="0.0" width="288" height="278"/>
+                                <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="17"/>
+                                <color key="textColor" red="0.57045853140000002" green="0.57047235969999999" blue="0.57046490910000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="0kQ-Ue-a06" firstAttribute="top" secondItem="HtQ-Fc-gTe" secondAttribute="top" id="0fr-se-j2a"/>
+                            <constraint firstItem="0kQ-Ue-a06" firstAttribute="centerX" secondItem="HtQ-Fc-gTe" secondAttribute="centerX" id="2qg-Di-K6O"/>
+                            <constraint firstItem="0kQ-Ue-a06" firstAttribute="centerY" secondItem="HtQ-Fc-gTe" secondAttribute="centerY" id="2sJ-Jc-Uo4"/>
+                            <constraint firstItem="0kQ-Ue-a06" firstAttribute="leading" secondItem="HtQ-Fc-gTe" secondAttribute="leading" id="KjA-Ag-c30"/>
+                            <constraint firstAttribute="bottom" secondItem="0kQ-Ue-a06" secondAttribute="bottom" id="Y06-Hl-8jV"/>
+                            <constraint firstAttribute="trailing" secondItem="0kQ-Ue-a06" secondAttribute="trailing" id="buQ-i4-me2"/>
+                        </constraints>
+                    </view>
+                </subviews>
+                <constraints>
+                    <constraint firstItem="HtQ-Fc-gTe" firstAttribute="top" secondItem="gND-RK-l01" secondAttribute="topMargin" id="2Yo-0Z-r2u"/>
+                    <constraint firstItem="HtQ-Fc-gTe" firstAttribute="leading" secondItem="gND-RK-l01" secondAttribute="leadingMargin" id="A0o-KC-gMV"/>
+                    <constraint firstAttribute="trailingMargin" secondItem="HtQ-Fc-gTe" secondAttribute="trailing" id="XI6-n3-38S"/>
+                    <constraint firstAttribute="bottomMargin" secondItem="HtQ-Fc-gTe" secondAttribute="bottom" id="Xgc-dP-Pgx"/>
+                </constraints>
+            </tableViewCellContentView>
+            <connections>
+                <outlet property="noFoundLabel" destination="0kQ-Ue-a06" id="DDa-bB-gyP"/>
+            </connections>
+            <point key="canvasLocation" x="-963.76811594202911" y="101.11607142857143"/>
+        </tableViewCell>
+    </objects>
+    <resources>
+        <systemColor name="systemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+    </resources>
+</document>
