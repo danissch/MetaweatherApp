@@ -25,11 +25,6 @@ extension UIViewController {
         
         if navigationBarIsHidden{
             self.navigationController?.navigationBar.isHidden = true
-        }else{
-            self.navigationController?.navigationBar.isTranslucent = false
-            self.navigationController?.navigationBar.barTintColor = UIColor.black
-            self.navigationController?.navigationBar.tintColor = UIColor.white
-            self.navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.white, NSAttributedString.Key.font:UIFont.boldSystemFont(ofSize: 16)]
         }
         
         self.navigationController?.pushViewController(uiViewController, animated: animated)

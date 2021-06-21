@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="18122" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="18093"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="iN0-l3-epB" customClass="WeatherPronosticBarView" customModule="MetaweatherApp" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="144" height="143"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="PPf-TG-nrA">
+                    <rect key="frame" x="0.0" y="0.0" width="144" height="143"/>
+                    <subviews>
+                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="suW-Sy-FTA">
+                            <rect key="frame" x="27" y="12" width="90" height="90"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="90" id="ZCe-q0-nzz"/>
+                                <constraint firstAttribute="width" constant="90" id="t7U-LI-fYd"/>
+                            </constraints>
+                        </imageView>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Day" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="KLA-iE-X1F">
+                            <rect key="frame" x="22" y="109" width="100" height="21"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="21" id="hGy-qo-CKT"/>
+                            </constraints>
+                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                            <nil key="textColor"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="n2x-JQ-jLe">
+                            <rect key="frame" x="0.0" y="0.0" width="144" height="143"/>
+                            <state key="normal" title="Button"/>
+                            <connections>
+                                <action selector="actionWeatherButtonAction:" destination="iN0-l3-epB" eventType="touchUpInside" id="eSG-NN-WE0"/>
+                            </connections>
+                        </button>
+                    </subviews>
+                    <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                    <constraints>
+                        <constraint firstItem="n2x-JQ-jLe" firstAttribute="top" secondItem="PPf-TG-nrA" secondAttribute="top" id="6DT-GF-Cnk"/>
+                        <constraint firstItem="KLA-iE-X1F" firstAttribute="centerX" secondItem="PPf-TG-nrA" secondAttribute="centerX" id="7c3-FG-gR5"/>
+                        <constraint firstAttribute="bottom" secondItem="n2x-JQ-jLe" secondAttribute="bottom" id="DB5-w2-Cmn"/>
+                        <constraint firstItem="n2x-JQ-jLe" firstAttribute="leading" secondItem="PPf-TG-nrA" secondAttribute="leading" id="aZC-uU-eeY"/>
+                        <constraint firstItem="suW-Sy-FTA" firstAttribute="top" secondItem="PPf-TG-nrA" secondAttribute="top" constant="12" id="crJ-TD-b9j"/>
+                        <constraint firstAttribute="trailing" secondItem="KLA-iE-X1F" secondAttribute="trailing" constant="22" id="hj9-Cg-d2k"/>
+                        <constraint firstItem="suW-Sy-FTA" firstAttribute="centerX" secondItem="PPf-TG-nrA" secondAttribute="centerX" id="miC-v1-djN"/>
+                        <constraint firstItem="KLA-iE-X1F" firstAttribute="top" secondItem="suW-Sy-FTA" secondAttribute="bottom" constant="7" id="mw8-0y-thd"/>
+                        <constraint firstAttribute="trailing" secondItem="n2x-JQ-jLe" secondAttribute="trailing" id="nLH-Cz-AiP"/>
+                        <constraint firstItem="KLA-iE-X1F" firstAttribute="leading" secondItem="PPf-TG-nrA" secondAttribute="leading" constant="22" id="vtC-le-aaE"/>
+                    </constraints>
+                </view>
+            </subviews>
+            <viewLayoutGuide key="safeArea" id="vUN-kp-3ea"/>
+            <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+            <constraints>
+                <constraint firstItem="PPf-TG-nrA" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="65C-JD-aZq"/>
+                <constraint firstItem="PPf-TG-nrA" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="E1V-vV-a2n"/>
+                <constraint firstAttribute="trailing" secondItem="PPf-TG-nrA" secondAttribute="trailing" id="O2M-RP-z8a"/>
+                <constraint firstItem="PPf-TG-nrA" firstAttribute="bottom" secondItem="vUN-kp-3ea" secondAttribute="bottom" id="u6M-e6-6cC"/>
+            </constraints>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <connections>
+                <outlet property="weatherButtonForAction" destination="n2x-JQ-jLe" id="eru-hE-lRy"/>
+                <outlet property="weatherDayLabel" destination="KLA-iE-X1F" id="w3J-Oo-7lc"/>
+                <outlet property="weatherImageView" destination="suW-Sy-FTA" id="gQQ-Of-BA9"/>
+            </connections>
+            <point key="canvasLocation" x="-115.94202898550725" y="-214.62053571428569"/>
+        </view>
+    </objects>
+    <resources>
+        <systemColor name="systemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+    </resources>
+</document>

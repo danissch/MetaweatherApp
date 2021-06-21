@@ -11,7 +11,6 @@ import UIKit
 class MetaweatherListTableViewCell: UITableViewCell {
     
     @IBOutlet weak var labelLocationTitle: UILabel!
-
     @IBOutlet weak var labelLocationType: UILabel!
     
     override func awakeFromNib() {

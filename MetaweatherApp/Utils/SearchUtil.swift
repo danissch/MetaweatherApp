@@ -41,7 +41,7 @@ class SearchUtil: UISearchBar {
             ])
             
             searchTextField.clipsToBounds = true
-//            searchTextField.layer.cornerRadius = (self.frame.height / 2) - 22
+            searchTextField.layer.cornerRadius = (self.frame.height / 2) - 22
             searchTextField.backgroundColor = UIColor.init(red: 255/255, green: 255/255, blue: 255/255, alpha: 0.92)
             
             searchTextField.placeholder = "Search"

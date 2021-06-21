@@ -10,14 +10,14 @@ import Foundation
 // MARK: - WeatherModel
 struct WeatherModel: Decodable {
     let id: Int
-    let weatherStateName: WeatherStateName
-    let weatherStateAbbr: WeatherStateAbbr
-    let windDirectionCompass: WindDirectionCompass
+    let weatherStateName: String
+    let weatherStateAbbr: String
+    let windDirectionCompass: String
     let created, applicableDate: String
     let minTemp, maxTemp, theTemp, windSpeed: Double?
     let windDirection: Double
-    let airPressure, humidity: Int?
-    let visibility: Double?
+    let humidity: Int?
+    let airPressure, visibility: Double?
     let predictability: Int
 
     enum CodingKeys: String, CodingKey {
@@ -37,20 +37,9 @@ struct WeatherModel: Decodable {
     }
 }
 
-enum WeatherStateAbbr: String, Decodable {
-    case c = "c"
-    case lc = "lc"
+class WeatherModelUtil {
+    static let shared = WeatherModelUtil()
+    func getEmptyWeatherObject() -> WeatherModel {
+        return WeatherModel(id: 0, weatherStateName: "", weatherStateAbbr: "", windDirectionCompass: "", created: "", applicableDate: "", minTemp: 0, maxTemp: 0, theTemp: 0, windSpeed: 0, windDirection: 0, humidity: 0, airPressure: 0, visibility: 0, predictability: 0)
+    }
 }
-
-enum WeatherStateName: String, Decodable {
-    case clear = "Clear"
-    case lightCloud = "Light Cloud"
-}
-
-enum WindDirectionCompass: String, Decodable {
-    case nnw = "NNW"
-    case nw = "NW"
-    case windDirectionCompassFalse = "False"
-    case wnw = "WNW"
-}
-

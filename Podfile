@@ -8,6 +8,7 @@ target 'MetaweatherApp' do
   # Pods for MetaweatherApp
   pod 'Alamofire', '~> 4.4'
   pod 'NVActivityIndicatorView'
+  pod 'Kingfisher', '~> 4.8'
 
   target 'MetaweatherAppTests' do
     inherit! :search_paths

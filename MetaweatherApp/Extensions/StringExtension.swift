@@ -22,4 +22,20 @@ extension String {
         return urlFromString
     }
     
+    //format: "yyyy-MM-dd HH:mm:ss"
+    func toDate(withFormat format: String = "yyyy-MM-dd", timezone: String = "America/Bogota")-> Date?{
+        let dateFormatter = DateFormatter()
+        print("toDate:timezone::\(timezone)")
+        print("toDate:format::\(format)")
+        print("toDate:self::\(self)")
+//        dateFormatter.timeZone = TimeZone(identifier: timezone)
+//        dateFormatter.locale = Locale(identifier: "fa-IR")
+        dateFormatter.calendar = Calendar(identifier: .gregorian)
+        dateFormatter.dateFormat = format
+        let date = dateFormatter.date(from: self)
+
+        return date
+    }
+    
+    
 }

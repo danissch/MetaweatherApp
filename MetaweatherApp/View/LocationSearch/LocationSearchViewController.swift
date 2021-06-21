@@ -1,5 +1,5 @@
 //
-//  MetaWeatherViewController.swift
+//  LocationSearchViewController.swift
 //  MetaweatherApp
 //
 //  Created by Daniel Duran Schutz on 16/06/21.
@@ -9,7 +9,7 @@ import Foundation
 import UIKit
 import NVActivityIndicatorView
 
-class MetaWeatherViewController: UIViewController {
+class LocationSearchViewController: UIViewController {
     
     @IBOutlet weak var tableView: UITableView!
     var locationSearchViewModel: LocationSearchViewModelProtocol?
@@ -40,7 +40,7 @@ class MetaWeatherViewController: UIViewController {
 
 }
 
-extension MetaWeatherViewController {
+extension LocationSearchViewController {
     func registerViewsTableView(){
         let headernib = UINib(nibName: "ListHeaderView", bundle: nil)
         tableView.register(headernib, forHeaderFooterViewReuseIdentifier: "listHeaderView")
@@ -61,38 +61,19 @@ extension MetaWeatherViewController {
     }
     
     func searchLocation(toLookFor: String){
-//        if loadingData || _noFurtherData {
-//            return
-//        }
-//        loadingData = true
         
         let filteredListCount = self.locationSearchViewModel?.filteredLocationSearchList.count
         let listCount = self.locationSearchViewModel?.locationSearchList.count
         
-        let previousCount = isSearching ? filteredListCount : listCount
-        print("Appflow:: filteredListCount:: \(filteredListCount)")
-        print("Appflow:: listCount:: \(listCount)")
-        print("Appflow:: previousCount:: \(previousCount)")
-        
+        _ = isSearching ? filteredListCount : listCount
         locationSearchViewModel?.searchByTerm(termToSearch: toLookFor) { [weak self] (result) in
             guard let self = self else { return }
-//            self.isPullingUp = false
-//            self.loadingData = false
             switch result {
             case .Success(_, _):
-                
                 let filteredListCount = self.locationSearchViewModel?.filteredLocationSearchList.count
                 let listCount = self.locationSearchViewModel?.locationSearchList.count
-                
-                let count = self.isSearching ? filteredListCount : listCount
-                print("Appflow::B filteredListCount:: \(filteredListCount)")
-                print("Appflow::B listCount:: \(listCount)")
-                print("Appflow::B listCount:: \(listCount)")
-                
+                _ = self.isSearching ? filteredListCount : listCount
                 self.tableView?.reloadData()
-//                if count == previousCount {
-//                    self._noFurtherData = true
-//                }
             case .Error(let message, let statusCode):
                 print("Error \(message) \(statusCode ?? 0)")
             }
@@ -103,7 +84,7 @@ extension MetaWeatherViewController {
 }
 
 //Activity Indicator
-extension MetaWeatherViewController {
+extension LocationSearchViewController {
     
     func setActivityIndicatorConfig(){
         let view = UIView(frame: self.tabBarController?.view.frame ?? self.view.frame)
@@ -142,7 +123,7 @@ extension MetaWeatherViewController {
     }
 }
 
-extension MetaWeatherViewController: UITableViewDelegate, UITableViewDataSource{
+extension LocationSearchViewController: UITableViewDelegate, UITableViewDataSource{
     func numberOfSections(in tableView: UITableView) -> Int {
         1
     }
@@ -166,12 +147,10 @@ extension MetaWeatherViewController: UITableViewDelegate, UITableViewDataSource{
         }
 
         stopActivityIndicator()
-//        if (indexPath.row >= (listCount) - preloadCount) && !loadingData { requestRows() }
         
         guard let metaweatherListTableViewCell = tableView.dequeueReusableCell(withIdentifier: "MetaweatherListTableViewCell") as? MetaweatherListTableViewCell else {
             return UITableViewCell()
         }
-//
         metaweatherListTableViewCell.selectedBackgroundView = setBackgroundCellView()
         
         if let viewModelItem = isSearching ? locationSearchViewModel?.filteredLocationSearchList[indexPath.row] : locationSearchViewModel?.locationSearchList[indexPath.row] {
@@ -214,9 +193,6 @@ extension MetaWeatherViewController: UITableViewDelegate, UITableViewDataSource{
 
         if let dataItem = list?[indexPath.row] {
             let vc = LocationDetailViewController.instantiateFromXIB() as LocationDetailViewController
-//            let result = pokemonViewModel?.pokemonListForDetailArray.filter { $0.headerPokemonName.contains(dataItem.pname) }
-//            vc.pokemonDetailObject = result?[0]
-//            presentWithStyle1(vcFrom: self, vcTo: vc)
             vc.setControllerData(locationSearchModel: dataItem)
             pushVc(vc, animated: true, navigationBarIsHidden: false)
         }
@@ -238,7 +214,7 @@ extension MetaWeatherViewController: UITableViewDelegate, UITableViewDataSource{
     }
 }
 
-extension MetaWeatherViewController: UISearchBarDelegate{
+extension LocationSearchViewController: UISearchBarDelegate{
     
     func addSearch() -> SearchUtil? {
         searchView = SearchUtil.init(frame: CGRect(x: 0, y: 0, width: Int(view.frame.size.width), height: searchBarHeight))
@@ -259,36 +235,17 @@ extension MetaWeatherViewController: UISearchBarDelegate{
         isEditing = false
         searchBar.text = ""
         searchLocation(toLookFor: "")
-//        requestRows(reset: true)
     }
     
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
         isEditing = false
-//        isSearching = true
-//        pokemonViewModel?.filteredPokemonListForCells.removeAll(keepingCapacity: false)
-//        let predicateString = searchBar.text!.lowercased()
-//        let newList = (self.pokemonViewModel?.pokemonListForCells.filter({($0.pname.lowercased().contains(predicateString) ?? false)}))
-//        self.pokemonViewModel?.filteredPokemonListForCells = newList ?? []
-//        self.pokemonViewModel?.filteredPokemonListForCells.sort {$0.pname ?? "" < $1.pname ?? ""}
-//        self.isSearching = (self.pokemonViewModel?.filteredPokemonListForCells.count == 0) ? false: true
-//        self.tableView.reloadData()
-//        if pokemonViewModel?.filteredPokemonListForCells.count == 0 {
-//            self.searchView?.setNoResultsMessageSearch(viewController: self)
-//        }
-        
     }
     
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
         if searchBar.text == "" {
-//            isSearching = false
-//            loadingData = false
-//            _noFurtherData = false
             searchLocation(toLookFor: "")
             tableView.reloadData()
         } else {
-//            isSearching = true
-//            loadingData = true
-//            _noFurtherData = false
             searchLocation(toLookFor: searchBar.text ?? "")
         }
         

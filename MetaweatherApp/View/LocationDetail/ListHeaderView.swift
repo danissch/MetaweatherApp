@@ -20,15 +20,10 @@ class ListHeaderView: UIView {
     
     override init(frame: CGRect) {
         super.init(frame: frame)
-        
         addContainerViewHeader()
         addBackground2()
         addMainTitle()
         addHeaderSubSectionView()
-        
-        
-        
-        
     }
     
     required init?(coder: NSCoder) {
@@ -49,8 +44,6 @@ class ListHeaderView: UIView {
         self.background.frame = CGRect(x: 0, y: 0, width: UIScreen.main.bounds.width, height: height)
         self.containerBackground2.frame =  CGRect(x: 0, y: 0, width: UIScreen.main.bounds.width, height: height)
     }
-    
-    
     
     func addContainerViewHeader(){
         self.customContainerViewHeader = UIView(frame: CGRect(x: 0, y: 0, width: UIScreen.main.bounds.width, height: height))

@@ -46,7 +46,6 @@ class LocationSearchViewModel: LocationSearchViewModelProtocol {
                     if let data = json?.data(using: .utf8) {
                         let decoder = JSONDecoder()
                         let locationSearchResponse = try decoder.decode([LocationSearchModel].self, from: data)
-//                        self.privLocationSearchList.append(contentsOf: locationSearchResponse)
                         self.privLocationSearchList = locationSearchResponse
                         return completion(.Success(self.privLocationSearchList, statusCode))
                     }
