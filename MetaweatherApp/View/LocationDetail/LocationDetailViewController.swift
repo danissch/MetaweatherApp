@@ -32,7 +32,7 @@ class LocationDetailViewController: UIViewController {
     @IBOutlet weak var humidityLabel: UILabel!
     @IBOutlet weak var humidityIcon: UIImageView!
     @IBOutlet weak var userSmokeImage: UIImageView!
-    @IBOutlet weak var layerOrnamentImageProfile: UIView!
+    @IBOutlet weak var layerOrnamentImageWeather: UIView!
     @IBOutlet weak var todaysWeatherIcon: UIImageView!
     @IBOutlet weak var headerWeatherName: UILabel!
     @IBOutlet weak var headerWeatherButton: UIButton!
@@ -47,7 +47,7 @@ class LocationDetailViewController: UIViewController {
     let minHeaderHeight: CGFloat = 44
     var previousScrollOffset: CGFloat = 0
     var minLocationDetailCellHeight:CGFloat = 414
-        
+    var pronosticBarAlreadyExists: Bool = false
     private var locationSearchModel: LocationSearchModel?
     private var locationDetailViewModel: LocationDetailViewModelProtocol?
     private var weatherTodayObject: WeatherModel?
@@ -95,14 +95,13 @@ extension LocationDetailViewController {
     func setHeaderData(tapFromBar: Bool = false) {
         if let weatherLocationObject = locationDetailViewModel?.weatherLocationDetail.first, let todaysWeather = locationDetailViewModel?.todaysWeather {
             let locationDetailFacade = LocationDetailsVCFacade(vc: self,
-                                                               weatherLocationObject: weatherLocationObject, todaysWeather: todaysWeather, locationDetailViewModel: locationDetailViewModel as! LocationDetailViewModelProtocol)
+                                                               weatherLocationObject: weatherLocationObject, todaysWeather: todaysWeather, locationDetailViewModel: locationDetailViewModel!)
             locationDetailFacade.setHeaderData(tapFromBar: tapFromBar)
         }
     }
     
     func setDefaultStateViews(){
         //Pending refactor
-        self.weatherLocationTitle.isHidden = true
         self.weatherLocationTitle.layer.cornerRadius = weatherLocationTitle.bounds.height / 2
         self.weatherTempContainerView.layer.cornerRadius = weatherTempContainerView.bounds.height / 2
         self.windSpeedContainerView.layer.cornerRadius = windSpeedContainerView.bounds.height / 2
@@ -128,7 +127,6 @@ extension LocationDetailViewController {
                 self.reloadAll()
             case .Error(let message, let statusCode):
                 print("Error \(message) \(statusCode ?? 0)")
-                UIAlertController.init(title: "getWeatherLocationDetail Error \(statusCode)", message: message, preferredStyle: .alert)
             }
         }
         
@@ -146,8 +144,6 @@ extension LocationDetailViewController {
                     self.getWeatherLocationDetail(woeid: woeid)
                 case .Error(let message, let statusCode):
                     print("Error \(message) \(statusCode ?? 0)")
-                    UIAlertController.init(title: "getWeatherToday Error \(statusCode)", message: message, preferredStyle: .alert)
-                    
                 }
             }
         }
@@ -209,7 +205,7 @@ extension LocationDetailViewController: UITableViewDataSource {
         case 0:
             minLocationDetailCellHeight = 500
         case 1:
-            minLocationDetailCellHeight = 370
+            minLocationDetailCellHeight = 300
         default:
             minLocationDetailCellHeight = 0
         }
@@ -278,13 +274,6 @@ extension LocationDetailViewController {
                 }else{
                     setHeaderBehavior(headerActive: false)
                 }
-    
-//               let originFrame = weatherPronosticStackView.frame
-//                if newHeightHeader <= maxHeaderHeight - footerView.frame.height{
-//                    weatherPronosticStackView.frame = self.inactiveHeader.frame
-//                }else{
-//                    weatherPronosticStackView.frame = originFrame
-//                }
                 
                 if newHeightHeader <= maxHeaderHeight - (footerView.frame.height + todayWeatherIconView.frame.height){
                     todayWeatherIconView.fadeOut()
@@ -325,19 +314,18 @@ extension LocationDetailViewController {
 //        self.todayWeatherIconView.layer.borderColor = UIColor.gray.cgColor.copy(alpha: 0.1)
         self.todayWeatherIconView.layer.cornerRadius = todayWeatherIconView.frame.height / 2
         self.todayWeatherIconView.backgroundColor = UIColor.init(red: 255/255, green: 255/255, blue: 255/255, alpha: 0.9)
+        self.todayWeatherIconView.layer.shadowColor = UIColor.black.cgColor
+        self.todayWeatherIconView.layer.shadowOpacity = 1
+        self.todayWeatherIconView.layer.shadowRadius = 10
+        self.todayWeatherIconView.layer.shadowOffset = .init(width: 2, height: 2)
+
         self.userSmokeImage.clipsToBounds = true
         self.userSmokeImage.layer.cornerRadius = self.userSmokeImage.frame.height / 2
         
         self.todaysWeatherIcon.clipsToBounds = true
         self.todaysWeatherIcon.layer.cornerRadius = self.todaysWeatherIcon.frame.height / 2
-        
-        
-//        self.layerOrnamentImageProfile.backgroundColor = UIColor.init(red: 0/255, green: 0/255, blue: 0/255, alpha: 0.4)
-        self.layerOrnamentImageProfile.clipsToBounds = true
-//        self.layerOrnamentImageProfile.layer.borderColor = UIColor.white.cgColor.copy(alpha: 0.9)
-//        self.layerOrnamentImageProfile.layer.borderWidth = 1.0
-        
-        self.layerOrnamentImageProfile.layer.cornerRadius = self.layerOrnamentImageProfile.frame.height / 2
+        self.layerOrnamentImageWeather.clipsToBounds = true
+        self.layerOrnamentImageWeather.layer.cornerRadius = self.layerOrnamentImageWeather.frame.height / 2
         
     }
     
@@ -357,8 +345,6 @@ extension LocationDetailViewController {
     
     func setupStackViewFeatures(){
         weatherPronosticStackView.backgroundColor = UIColor.init(white: 1.0, alpha: 0.1)
-        weatherPronosticStackView.clipsToBounds = true
-        weatherPronosticStackView.layer.cornerRadius = 16
-        
+        weatherPronosticStackView.clipsToBounds = true        
     }
 }

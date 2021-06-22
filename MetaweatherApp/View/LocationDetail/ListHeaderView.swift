@@ -38,37 +38,37 @@ class ListHeaderView: UIView {
         setMainTitleConfig(title: title)
         setHeaderSubSectionView(view: view)
     }
-    
-    func setConfigFromTabBar(height:CGFloat){
-        self.customContainerViewHeader.frame = CGRect(x: 0, y: 0, width: UIScreen.main.bounds.width, height: height)
-        self.background.frame = CGRect(x: 0, y: 0, width: UIScreen.main.bounds.width, height: height)
-        self.containerBackground2.frame =  CGRect(x: 0, y: 0, width: UIScreen.main.bounds.width, height: height)
-    }
+
     
     func addContainerViewHeader(){
         self.customContainerViewHeader = UIView(frame: CGRect(x: 0, y: 0, width: UIScreen.main.bounds.width, height: height))
         self.background = UIImageView(frame: CGRect(x: 0, y: 0, width: UIScreen.main.bounds.width, height: height))
         background.image = UIImage(named: "weatherBanner")
+        background.contentMode = .scaleToFill
         self.customContainerViewHeader.addSubview(background)
         self.addSubview(customContainerViewHeader)
+//        self.customContainerViewHeader.autoresizingMask = [.flexibleLeftMargin, .flexibleTopMargin, .flexibleRightMargin, .flexibleBottomMargin]
+        self.customContainerViewHeader.autoresizingMask = [.flexibleWidth, .flexibleHeight]
+        self.background.autoresizingMask = [.flexibleWidth, .flexibleHeight]
     }
     
     func addBackground2() {
         self.containerBackground2 = UIView(frame: CGRect(x: 0, y: 0, width: UIScreen.main.bounds.width, height: height - 2))
         self.containerBackground2.backgroundColor = UIColor.white.withAlphaComponent(0.50)
         self.customContainerViewHeader.addSubview(containerBackground2)
-        
+        self.containerBackground2.autoresizingMask = [.flexibleWidth, .flexibleHeight]
     }
     
     func addMainTitle(){
         self.mainTitle = UILabel(frame: CGRect(x: 0, y: 0, width: UIScreen.main.bounds.width, height: 65))
         self.customContainerViewHeader.addSubview(mainTitle)
+        self.mainTitle.autoresizingMask = [.flexibleWidth, .flexibleHeight]
     }
     
     func addHeaderSubSectionView(){
         self.headerSubSectionView = UIView(frame: CGRect(x: 0, y: 45, width: UIScreen.main.bounds.width - 20, height: 60))
         self.customContainerViewHeader.addSubview(headerSubSectionView)
-        
+        self.headerSubSectionView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
         self.headerSubSectionView.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
             self.headerSubSectionView.widthAnchor.constraint(equalToConstant: headerSubSectionView.frame.width),
@@ -88,6 +88,7 @@ class ListHeaderView: UIView {
     func setHeaderSubSectionView(view:UIView){
         view.frame = CGRect(x: headerSubSectionView.frame.origin.x, y: 0, width: headerSubSectionView.frame.width, height: view.frame.height)
         self.headerSubSectionView.addSubview(view)
+        view.autoresizingMask = [.flexibleWidth, .flexibleHeight]
     }
     
     

@@ -34,6 +34,7 @@ class SearchUtil: UISearchBar {
         self.searchBarStyle = .minimal
         if let searchTextField = self.value(forKey: "searchField") as? UITextField {
             NSLayoutConstraint.activate([
+                searchTextField.widthAnchor.constraint(equalTo: self.widthAnchor),
                 searchTextField.heightAnchor.constraint(equalToConstant: 50),
                 searchTextField.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 10),
                 searchTextField.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -10),
@@ -43,6 +44,7 @@ class SearchUtil: UISearchBar {
             searchTextField.clipsToBounds = true
             searchTextField.layer.cornerRadius = (self.frame.height / 2) - 22
             searchTextField.backgroundColor = UIColor.init(red: 255/255, green: 255/255, blue: 255/255, alpha: 0.92)
+            searchTextField.textColor = .systemGray
             
             searchTextField.placeholder = "Search"
 

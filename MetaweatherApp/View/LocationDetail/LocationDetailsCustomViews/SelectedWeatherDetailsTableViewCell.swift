@@ -13,7 +13,7 @@ class SelectedWeatherDetailsTableViewCell: UITableViewCell {
     @IBOutlet weak var idValueLabel: UILabel!
     @IBOutlet weak var weather_state_nameValueLabel: UILabel!
     @IBOutlet weak var wind_direction_compassValueLabel: UILabel!
-    @IBOutlet weak var createdValueLabel: UILabel!
+//    @IBOutlet weak var createdValueLabel: UILabel!
     @IBOutlet weak var applicable_dateValueLabel: UILabel!
     @IBOutlet weak var the_tempValueLabel: UILabel!
     @IBOutlet weak var min_tempValueLabel: UILabel!
@@ -25,11 +25,17 @@ class SelectedWeatherDetailsTableViewCell: UITableViewCell {
     @IBOutlet weak var visibilityValueLabel: UILabel!
     @IBOutlet weak var predictabilityValueLabel: UILabel!
     
+    
+    @IBOutlet weak var weatherDetailsLabel: UILabel!
+    
+    
+    
     var weather: WeatherModel?
     
     override func awakeFromNib() {
         super.awakeFromNib()
-        print("SelectedWeatherDetailsTableViewCell awakeFromNib")
+//        print("SelectedWeatherDetailsTableViewCell awakeFromNib")
+        weatherDetailsLabel.layer.cornerRadius = weatherDetailsLabel.bounds.height / 2
     }
     
     func setDataValuesFromModel(weather: WeatherModel){
@@ -41,7 +47,7 @@ class SelectedWeatherDetailsTableViewCell: UITableViewCell {
         idValueLabel.text = self.weather?.id.description
         weather_state_nameValueLabel.text = self.weather?.weatherStateName.description
         wind_direction_compassValueLabel.text = self.weather?.windDirectionCompass.description
-        createdValueLabel.text = self.weather?.created.description
+//        createdValueLabel.text = self.weather?.created.description
         applicable_dateValueLabel.text = self.weather?.applicableDate.description
         the_tempValueLabel.text = self.weather?.theTemp?.description
         min_tempValueLabel.text = self.weather?.minTemp?.description

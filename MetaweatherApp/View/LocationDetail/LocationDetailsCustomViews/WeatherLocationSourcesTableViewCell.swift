@@ -11,7 +11,6 @@ import UIKit
 class WeatherLocationSourcesTableViewCell: UITableViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
-        print("WeatherLocationSourcesTableViewCell awakeFromNib")
     }
     
 }

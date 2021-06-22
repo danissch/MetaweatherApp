@@ -35,8 +35,18 @@ class LocationSearchViewController: UIViewController {
         setupViewModel()
         registerViewsTableView()
         self.hideKeyboardWhenTappedAround()
-        setActivityIndicatorConfig()
     }
+    
+    override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
+            super.viewWillTransition(to: size, with: coordinator)
+            if UIDevice.current.orientation.isLandscape {
+                print("Landscape")
+
+            } else {
+                print("Portrait")
+                
+            }
+        }
 
 }
 
@@ -61,18 +71,13 @@ extension LocationSearchViewController {
     }
     
     func searchLocation(toLookFor: String){
-        
-        let filteredListCount = self.locationSearchViewModel?.filteredLocationSearchList.count
-        let listCount = self.locationSearchViewModel?.locationSearchList.count
-        
-        _ = isSearching ? filteredListCount : listCount
-        locationSearchViewModel?.searchByTerm(termToSearch: toLookFor) { [weak self] (result) in
+        self.locationSearchViewModel?.searchByTerm(termToSearch: toLookFor) { [weak self] (result) in
             guard let self = self else { return }
             switch result {
             case .Success(_, _):
-                let filteredListCount = self.locationSearchViewModel?.filteredLocationSearchList.count
-                let listCount = self.locationSearchViewModel?.locationSearchList.count
-                _ = self.isSearching ? filteredListCount : listCount
+//                    let filteredListCount = self.locationSearchViewModel?.filteredLocationSearchList.count
+//                    let listCount = self.locationSearchViewModel?.locationSearchList.count
+//                _ = self.isSearching ? filteredListCount : listCount
                 self.tableView?.reloadData()
             case .Error(let message, let statusCode):
                 print("Error \(message) \(statusCode ?? 0)")
@@ -81,46 +86,8 @@ extension LocationSearchViewController {
     }
     
     
-}
-
-//Activity Indicator
-extension LocationSearchViewController {
     
-    func setActivityIndicatorConfig(){
-        let view = UIView(frame: self.tabBarController?.view.frame ?? self.view.frame)
-        coverView = view
-        coverView.backgroundColor = .black
-        coverView.alpha = 0.0
-        loading = NVActivityIndicatorView(frame: coverView.frame, type: .ballSpinFadeLoader, color: .systemGray, padding: self.view.frame.width / 3)
-        coverView.addSubview(loading)
-        self.tabBarController?.view.addSubview(coverView)
-
-        UIView.animate(withDuration: 0.3, delay: 0, options: .transitionCrossDissolve, animations: {
-            self.coverView.alpha = 0.8
-        }, completion: nil)
-        
-        coverView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
-        loading.autoresizingMask = [.flexibleLeftMargin, .flexibleTopMargin, .flexibleRightMargin, .flexibleBottomMargin]
-        loading.translatesAutoresizingMaskIntoConstraints = true
-    }
     
-    func startActivityIndicator(){
-        self.loading.startAnimating()
-        UIView.animate(withDuration: 0.3, delay: 0, options: .transitionCrossDissolve, animations: {
-                self.coverView?.alpha = 0.8
-        })
-    }
-    
-    func stopActivityIndicator(){
-        DispatchQueue.main.asyncAfter(deadline:DispatchTime.now() + 3){
-            UIView.animate(withDuration: 0.3, delay: 0, options: .transitionCrossDissolve, animations: {
-                    self.coverView?.alpha = 0
-            }) { (_) in
-                    self.loading.stopAnimating()
-            }
-            
-        }
-    }
 }
 
 extension LocationSearchViewController: UITableViewDelegate, UITableViewDataSource{
@@ -140,13 +107,10 @@ extension LocationSearchViewController: UITableViewDelegate, UITableViewDataSour
         let listCount = isSearching ? locationSearchViewModel?.filteredLocationSearchList.count ?? 0 : locationSearchViewModel?.locationSearchList.count ?? 0
 
         if listCount == 0  {
-            startActivityIndicator()
             let noRowsCell = tableView.dequeueReusableCell(withIdentifier: "NoRecordsFoundTableViewCell", for: indexPath) as! NoRecordsFoundTableViewCell
             noRowsCell.noFoundLabel.text = ""
             return noRowsCell
         }
-
-        stopActivityIndicator()
         
         guard let metaweatherListTableViewCell = tableView.dequeueReusableCell(withIdentifier: "MetaweatherListTableViewCell") as? MetaweatherListTableViewCell else {
             return UITableViewCell()
@@ -217,7 +181,7 @@ extension LocationSearchViewController: UITableViewDelegate, UITableViewDataSour
 extension LocationSearchViewController: UISearchBarDelegate{
     
     func addSearch() -> SearchUtil? {
-        searchView = SearchUtil.init(frame: CGRect(x: 0, y: 0, width: Int(view.frame.size.width), height: searchBarHeight))
+        searchView = SearchUtil.init(frame: CGRect(x: 0, y: 0, width: Int(UIScreen.main.bounds.width), height: searchBarHeight))
         searchView = searchView?.getSearchBar(delegate: self as UISearchBarDelegate) as? SearchUtil
         searchView?.resignFirstResponder()
         return searchView
@@ -225,15 +189,24 @@ extension LocationSearchViewController: UISearchBarDelegate{
     
     func searchBarTextDidBeginEditing(_ searchBar: UISearchBar) {
         isEditing = true
+        if searchBar.text == "" {
+            searchLocation(toLookFor: "")
+            self.tableView.reloadData()
+        }
     }
     
     func searchBarTextDidEndEditing(_ searchBar: UISearchBar) {
         isEditing = false
+        if searchBar.text == "" {
+            searchLocation(toLookFor: "")
+            self.tableView.reloadData()
+        }
     }
     
     func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
         isEditing = false
         searchBar.text = ""
+        self.tableView.reloadData()
         searchLocation(toLookFor: "")
     }
     
@@ -243,12 +216,13 @@ extension LocationSearchViewController: UISearchBarDelegate{
     
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
         if searchBar.text == "" {
-            searchLocation(toLookFor: "")
-            tableView.reloadData()
+            self.searchLocation(toLookFor: "")
+            self.tableView.reloadData()
         } else {
-            searchLocation(toLookFor: searchBar.text ?? "")
+            isEditing = true
+            self.searchLocation(toLookFor: searchBar.text ?? "")
+//            self.tableView.reloadData()
         }
-        
         
     }
     

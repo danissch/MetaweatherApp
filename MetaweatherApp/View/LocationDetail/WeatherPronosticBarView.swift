@@ -49,7 +49,7 @@ class WeatherPronosticBarView: UIView {
         
         //center image
         let centerXConst = NSLayoutConstraint(item: weatherImageView, attribute: .centerX, relatedBy: .equal, toItem: self, attribute: .centerX, multiplier: 1.0, constant: 0.0)
-        let centerYConst = NSLayoutConstraint(item: weatherImageView, attribute: .centerY, relatedBy: .equal, toItem: self, attribute: .centerY, multiplier: 1.0, constant: -7)
+        let centerYConst = NSLayoutConstraint(item: weatherImageView, attribute: .centerY, relatedBy: .equal, toItem: self, attribute: .centerY, multiplier: 1.0, constant: -3)
         let heightConstraint = NSLayoutConstraint(item: weatherImageView, attribute: .height, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1.0, constant: 30)
         let widthConstraint = NSLayoutConstraint(item: weatherImageView, attribute: .width, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1.0, constant: 30)
         weatherImageView.addConstraints([heightConstraint, widthConstraint])
@@ -73,7 +73,7 @@ class WeatherPronosticBarView: UIView {
         let centerXConst = NSLayoutConstraint(item: weatherDayLabel, attribute: .centerX, relatedBy: .equal, toItem: self, attribute: .centerX, multiplier: 1.0, constant: 0)
         let centerYConst = NSLayoutConstraint(item: weatherDayLabel, attribute: .top, relatedBy: .equal, toItem: weatherImageView, attribute: .bottom, multiplier: 1.0, constant: 0)
         let widthConstraint = NSLayoutConstraint(item: weatherDayLabel, attribute: .width, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: self.bounds.width - 15)
-        let heightConstraint = NSLayoutConstraint(item: weatherDayLabel, attribute: .height, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1.0, constant: 18)
+        let heightConstraint = NSLayoutConstraint(item: weatherDayLabel, attribute: .height, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1.0, constant: 12)
         weatherDayLabel.addConstraints([heightConstraint, widthConstraint])
         NSLayoutConstraint.activate([centerXConst, centerYConst])
     }

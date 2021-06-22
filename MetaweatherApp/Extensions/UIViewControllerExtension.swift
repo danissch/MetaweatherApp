@@ -39,12 +39,14 @@ extension UIViewController {
     
     @objc internal func backButton(image:String = "arrow_left"){
         let button = UIButton(type: .system)
-    
-        button.setImage(UIImage(named: image), for: .normal)
-//        button.setTitle("Go back", for: .normal)
+        let image = UIImage(named: image)
+        let tintedImage = image?.withRenderingMode(.alwaysTemplate)
+        button.setImage(tintedImage, for: .normal)
+        button.tintColor = .white
         button.addTarget(self, action: #selector(navigateBack), for: .touchUpInside)
 
         let menuBarItem = UIBarButtonItem(customView: button)
+        menuBarItem.tintColor = .white
         menuBarItem.customView?.translatesAutoresizingMaskIntoConstraints = false
         menuBarItem.customView?.heightAnchor.constraint(equalToConstant: 24).isActive = true
         menuBarItem.customView?.widthAnchor.constraint(equalToConstant: 24).isActive = true

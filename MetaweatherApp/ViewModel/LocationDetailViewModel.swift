@@ -121,7 +121,6 @@ class LocationDetailViewModel: LocationDetailViewModelProtocol {
         if selectedWeather[0] == todaysWeatherId.id {
             return todaysWeather[0]
         }
-        print("getTomorrowDateString:.: \(Date().getTomorrowDateString())")
         let weatherTodayIndex = weatherLocationDetail[0].consolidatedWeather.firstIndex(where: {$0.id == selectedWeather[0]})
 
         if let index = weatherTodayIndex {
