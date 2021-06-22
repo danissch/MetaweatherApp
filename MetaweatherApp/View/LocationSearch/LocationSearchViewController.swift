@@ -7,7 +7,6 @@
 
 import Foundation
 import UIKit
-import NVActivityIndicatorView
 
 class LocationSearchViewController: UIViewController {
     
@@ -18,17 +17,8 @@ class LocationSearchViewController: UIViewController {
     let heightForCells:CGFloat = 90
     var searchView:SearchUtil?
     private let searchBarHeight:Int = 80
-    
-    private var isPullingUp = false
-    private var loadingData = false
-    private let preloadCount = 20
-    private var _noFurtherData = false
-    private var _page = -1
-    var isSearching : Bool = false
-    
+        
     var window: UIWindow?
-    var loading:NVActivityIndicatorView!
-    var coverView: UIView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -75,9 +65,6 @@ extension LocationSearchViewController {
             guard let self = self else { return }
             switch result {
             case .Success(_, _):
-//                    let filteredListCount = self.locationSearchViewModel?.filteredLocationSearchList.count
-//                    let listCount = self.locationSearchViewModel?.locationSearchList.count
-//                _ = self.isSearching ? filteredListCount : listCount
                 self.tableView?.reloadData()
             case .Error(let message, let statusCode):
                 print("Error \(message) \(statusCode ?? 0)")
@@ -95,16 +82,13 @@ extension LocationSearchViewController: UITableViewDelegate, UITableViewDataSour
         1
     }
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        if isSearching{
-            return locationSearchViewModel?.filteredLocationSearchList.count ?? 1
-        }
         return self.locationSearchViewModel?.locationSearchList.count ?? 1
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         
-        let listCount = isSearching ? locationSearchViewModel?.filteredLocationSearchList.count ?? 0 : locationSearchViewModel?.locationSearchList.count ?? 0
+        let listCount = locationSearchViewModel?.locationSearchList.count ?? 0
 
         if listCount == 0  {
             let noRowsCell = tableView.dequeueReusableCell(withIdentifier: "NoRecordsFoundTableViewCell", for: indexPath) as! NoRecordsFoundTableViewCell
@@ -117,7 +101,7 @@ extension LocationSearchViewController: UITableViewDelegate, UITableViewDataSour
         }
         metaweatherListTableViewCell.selectedBackgroundView = setBackgroundCellView()
         
-        if let viewModelItem = isSearching ? locationSearchViewModel?.filteredLocationSearchList[indexPath.row] : locationSearchViewModel?.locationSearchList[indexPath.row] {
+        if let viewModelItem = locationSearchViewModel?.locationSearchList[indexPath.row] {
             metaweatherListTableViewCell.setCellData(locationSearchModel: viewModelItem)
         }
         
@@ -153,7 +137,7 @@ extension LocationSearchViewController: UITableViewDelegate, UITableViewDataSour
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
         if locationSearchViewModel?.locationSearchList.count == 0 { return }
-        let list = isSearching ? locationSearchViewModel?.filteredLocationSearchList : locationSearchViewModel?.locationSearchList
+        let list = locationSearchViewModel?.locationSearchList
 
         if let dataItem = list?[indexPath.row] {
             let vc = LocationDetailViewController.instantiateFromXIB() as LocationDetailViewController

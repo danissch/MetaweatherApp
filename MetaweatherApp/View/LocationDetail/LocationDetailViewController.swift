@@ -6,7 +6,6 @@
 //
 
 import Foundation
-import NVActivityIndicatorView
 import UIKit
 import MapKit
 
@@ -310,8 +309,6 @@ extension LocationDetailViewController {
     
     func setWeatherIconSettings(){
         self.todayWeatherIconView.clipsToBounds = true
-//        self.todayWeatherIconView.layer.borderWidth = 1.0
-//        self.todayWeatherIconView.layer.borderColor = UIColor.gray.cgColor.copy(alpha: 0.1)
         self.todayWeatherIconView.layer.cornerRadius = todayWeatherIconView.frame.height / 2
         self.todayWeatherIconView.backgroundColor = UIColor.init(red: 255/255, green: 255/255, blue: 255/255, alpha: 0.9)
         self.todayWeatherIconView.layer.shadowColor = UIColor.black.cgColor
